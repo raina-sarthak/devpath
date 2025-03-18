@@ -144,11 +144,69 @@ const TrackCard = memo(({
 
         <AnimatePresence>
           {isSelected && !isTransitioning && (
-            <TrackDetails
-              track={track}
-              expandedTech={expandedTech}
-              setExpandedTech={setExpandedTech}
-            />
+            <>
+              <TrackDetails
+                track={track}
+                expandedTech={expandedTech}
+                setExpandedTech={setExpandedTech}
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.2 }}
+                className="mt-6 flex justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Link href={`/roadmap/${track.id}`}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`relative px-8 py-3.5 rounded-full
+                      overflow-hidden group
+                      text-white font-medium text-lg
+                      shadow-lg hover:shadow-xl
+                      flex items-center space-x-3
+                      ${track.difficulty === 'Beginner' ? 'shadow-emerald-500/20 hover:shadow-emerald-500/40' :
+                        track.difficulty === 'Intermediate' ? 'shadow-amber-500/20 hover:shadow-amber-500/40' :
+                        'shadow-rose-500/20 hover:shadow-rose-500/40'}`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${gradientColors[track.difficulty]} opacity-90
+                      group-hover:opacity-100 transition-opacity`} />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-30">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/40 via-transparent to-transparent" />
+                    </div>
+                    <div className={`absolute -inset-1 ${
+                      track.difficulty === 'Beginner' ? 'bg-emerald-500/20' :
+                      track.difficulty === 'Intermediate' ? 'bg-amber-500/20' :
+                      'bg-rose-500/20'
+                    } blur-lg group-hover:blur-xl transition-all duration-300 opacity-70 group-hover:opacity-100`} />
+                    <span className="relative z-10 font-semibold">Start Learning</span>
+                    <motion.svg 
+                      className="relative z-10 w-5 h-5" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      initial={{ x: 0 }}
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        duration: 1.5,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2.5} 
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </motion.svg>
+                  </motion.button>
+                </Link>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
 
@@ -240,23 +298,68 @@ export default function RoadMap() {
         {/* Call to action */}
         <div className="text-center mt-16">
           <Link href={selectedTrack ? `/${selectedTrack}` : '#'} className="inline-block">
-            <button 
-              className={`px-8 py-3 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] 
-                text-white font-medium transition-all shadow-lg shadow-blue-500/20
+            <motion.button 
+              whileHover={selectedTrack && !isTransitioning ? { scale: 1.05 } : {}}
+              whileTap={selectedTrack && !isTransitioning ? { scale: 0.95 } : {}}
+              className={`relative px-10 py-4 rounded-full
+                overflow-hidden group
+                text-white font-semibold text-lg
+                shadow-lg
                 ${selectedTrack && !isTransitioning ? 
-                  'hover:opacity-90 hover:shadow-blue-500/30 cursor-pointer' : 
+                  'hover:shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 cursor-pointer' : 
                   'opacity-50 cursor-not-allowed'}`}
               disabled={!selectedTrack || isTransitioning}
             >
-              {isTransitioning ? (
-                <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Loading...</span>
-                </div>
-              ) : (
-                selectedTrack ? 'Start Learning' : 'Select a path to begin'
-              )}
-            </button>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6]
+                group-hover:opacity-90 transition-opacity" />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-30">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/40 via-transparent to-transparent" />
+              </div>
+              <div className="absolute -inset-1 bg-blue-500/20 blur-lg group-hover:blur-xl transition-all duration-300 
+                opacity-70 group-hover:opacity-100" />
+              <motion.div 
+                className="relative z-10 flex items-center space-x-3"
+                animate={
+                  isTransitioning ? 
+                  { scale: [1, 1.05, 1], transition: { repeat: Infinity, duration: 1 } } :
+                  {}
+                }
+              >
+                {isTransitioning ? (
+                  <>
+                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Loading...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{selectedTrack ? 'Start Learning' : 'Select a path to begin'}</span>
+                    {selectedTrack && (
+                      <motion.svg 
+                        className="w-5 h-5" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                        initial={{ x: 0 }}
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ 
+                          repeat: Infinity, 
+                          duration: 1.5,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2.5} 
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </motion.svg>
+                    )}
+                  </>
+                )}
+              </motion.div>
+            </motion.button>
           </Link>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { SearchBar } from '@/components/SearchBar';
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-center relative z-10 px-4"
+        className="text-center relative z-10 px-4 w-full"
       >
         <motion.h1 
           className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#0EA5E9] via-[#8B5CF6] to-[#EC4899] mb-6"
@@ -31,7 +32,7 @@ export default function Home() {
             stiffness: 100 
           }}
         >
-          DevPath
+          DevPath by Sarthak Raina
         </motion.h1>
         
         <motion.div
@@ -57,15 +58,25 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 1 }}
             className="mt-6 text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
           >
-            Chart your path to becoming a developer with our comprehensive roadmaps and resources
+            Find a roadmap created by someone finding roadmaps :D
           </motion.p>
 
-          {/* Navigation buttons */}
+          {/* Search Bar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="mt-8 mx-auto max-w-2xl"
+          >
+            <SearchBar />
+          </motion.div>
+
+          {/* Navigation button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
+            className="mt-8"
           >
             <Link href="/roadmap" className="inline-block">
               <motion.button
@@ -77,18 +88,6 @@ export default function Home() {
                   border border-white/10"
               >
                 Explore Paths →
-              </motion.button>
-            </Link>
-            <Link href="/resources" className="inline-block">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 rounded-full bg-black/40
-                  text-white font-medium transition-all
-                  shadow-lg hover:shadow-[#8B5CF6]/20
-                  border border-white/10 hover:border-[#8B5CF6]/50"
-              >
-                View Resources
               </motion.button>
             </Link>
           </motion.div>
