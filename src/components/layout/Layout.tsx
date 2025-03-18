@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from './Navbar';
-import { Footer } from './Footer';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
