@@ -162,11 +162,11 @@ const TrackCard = memo(({
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`relative px-8 py-3.5 rounded-full
+                    className={`relative px-6 py-2.5 rounded-full
                       overflow-hidden group
-                      text-white font-medium text-lg
+                      text-white font-medium text-base
                       shadow-lg hover:shadow-xl
-                      flex items-center space-x-3
+                      flex items-center space-x-2
                       ${track.difficulty === 'Beginner' ? 'shadow-emerald-500/20 hover:shadow-emerald-500/40' :
                         track.difficulty === 'Intermediate' ? 'shadow-amber-500/20 hover:shadow-amber-500/40' :
                         'shadow-rose-500/20 hover:shadow-rose-500/40'}`}
@@ -177,14 +177,14 @@ const TrackCard = memo(({
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-30">
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/40 via-transparent to-transparent" />
                     </div>
-                    <div className={`absolute -inset-1 ${
+                    <div className={`absolute -inset-0.5 ${
                       track.difficulty === 'Beginner' ? 'bg-emerald-500/20' :
                       track.difficulty === 'Intermediate' ? 'bg-amber-500/20' :
                       'bg-rose-500/20'
-                    } blur-lg group-hover:blur-xl transition-all duration-300 opacity-70 group-hover:opacity-100`} />
-                    <span className="relative z-10 font-semibold">Start Learning</span>
+                    } blur-md group-hover:blur-lg transition-all duration-300 opacity-70 group-hover:opacity-100`} />
+                    <span className="relative z-10 font-medium">Start Learning</span>
                     <motion.svg 
-                      className="relative z-10 w-5 h-5" 
+                      className="relative z-10 w-4 h-4" 
                       fill="none" 
                       stroke="currentColor" 
                       viewBox="0 0 24 24"
@@ -199,7 +199,7 @@ const TrackCard = memo(({
                       <path 
                         strokeLinecap="round" 
                         strokeLinejoin="round" 
-                        strokeWidth={2.5} 
+                        strokeWidth={3} 
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </motion.svg>
@@ -301,9 +301,9 @@ export default function RoadMap() {
             <motion.button 
               whileHover={selectedTrack && !isTransitioning ? { scale: 1.05 } : {}}
               whileTap={selectedTrack && !isTransitioning ? { scale: 0.95 } : {}}
-              className={`relative px-10 py-4 rounded-full
+              className={`relative px-8 py-3 rounded-full
                 overflow-hidden group
-                text-white font-semibold text-lg
+                text-white font-medium text-base
                 shadow-lg
                 ${selectedTrack && !isTransitioning ? 
                   'hover:shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 cursor-pointer' : 
@@ -316,10 +316,10 @@ export default function RoadMap() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-30">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/40 via-transparent to-transparent" />
               </div>
-              <div className="absolute -inset-1 bg-blue-500/20 blur-lg group-hover:blur-xl transition-all duration-300 
+              <div className="absolute -inset-0.5 bg-blue-500/20 blur-md group-hover:blur-lg transition-all duration-300 
                 opacity-70 group-hover:opacity-100" />
               <motion.div 
-                className="relative z-10 flex items-center space-x-3"
+                className="relative z-10 flex items-center space-x-2"
                 animate={
                   isTransitioning ? 
                   { scale: [1, 1.05, 1], transition: { repeat: Infinity, duration: 1 } } :
@@ -328,7 +328,7 @@ export default function RoadMap() {
               >
                 {isTransitioning ? (
                   <>
-                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     <span>Loading...</span>
                   </>
                 ) : (
@@ -336,7 +336,7 @@ export default function RoadMap() {
                     <span>{selectedTrack ? 'Start Learning' : 'Select a path to begin'}</span>
                     {selectedTrack && (
                       <motion.svg 
-                        className="w-5 h-5" 
+                        className="w-4 h-4" 
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
@@ -351,7 +351,7 @@ export default function RoadMap() {
                         <path 
                           strokeLinecap="round" 
                           strokeLinejoin="round" 
-                          strokeWidth={2.5} 
+                          strokeWidth={2} 
                           d="M13 7l5 5m0 0l-5 5m5-5H6"
                         />
                       </motion.svg>
