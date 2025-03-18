@@ -1,103 +1,99 @@
-import Image from "next/image";
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black relative overflow-hidden">
+      {/* Background gradient blur effect */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0EA5E9]/10 via-[#8B5CF6]/10 to-[#EC4899]/10 blur-3xl opacity-30" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900/50 via-black to-black" />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-center relative z-10 px-4"
+      >
+        <motion.h1 
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#0EA5E9] via-[#8B5CF6] to-[#EC4899] mb-6"
+          initial={{ scale: 0.5 }}
+          animate={{ scale: 1 }}
+          transition={{ 
+            duration: 0.8,
+            delay: 0.2,
+            type: "spring",
+            stiffness: 100 
+          }}
+        >
+          DevPath
+        </motion.h1>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative"
+        >
+          {/* Animated line */}
+          <div className="h-0.5 w-32 md:w-48 mx-auto bg-gradient-to-r from-[#0EA5E9]/20 via-[#8B5CF6]/20 to-[#EC4899]/20 rounded-full overflow-hidden backdrop-blur-sm">
+            <motion.div
+              className="h-full w-full bg-gradient-to-r from-[#0EA5E9] via-[#8B5CF6] to-[#EC4899] origin-left"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.8 }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+
+          {/* Description text */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="mt-6 text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            Chart your path to becoming a developer with our comprehensive roadmaps and resources
+          </motion.p>
+
+          {/* Navigation buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Link href="/roadmap" className="inline-block">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] 
+                  text-white font-medium transition-all
+                  shadow-lg shadow-[#0EA5E9]/20 hover:shadow-[#0EA5E9]/40
+                  border border-white/10"
+              >
+                Explore Paths →
+              </motion.button>
+            </Link>
+            <Link href="/resources" className="inline-block">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 rounded-full bg-black/40
+                  text-white font-medium transition-all
+                  shadow-lg hover:shadow-[#8B5CF6]/20
+                  border border-white/10 hover:border-[#8B5CF6]/50"
+              >
+                View Resources
+              </motion.button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
